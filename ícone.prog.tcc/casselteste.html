@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Academia & Calistenia 8 Slides</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .slider {
+            margin: 0 auto;
+            width: 800px;
+            height: 450px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 4px solid #333;
+            position: relative;
+        }
+
+        .slides {
+            width: 800%; /* 8 slides = 800% */
+            height: 450px;
+            display: flex;
+        }
+
+        .slides input {
+            display: none;
+        }
+
+        .slide {
+            width: 12.5%; /* Cada slide ocupa 1/8 do total (100 / 8 = 12.5) */
+            transition: 1s ease-in-out;
+            position: relative;
+        }
+
+        .slide img {
+            width: 800px;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 60px;
+            left: 30px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-left: 5px solid #20a6ff;
+            text-transform: uppercase;
+            font-weight: bold;
+            z-index: 5;
+        }
+
+        /* --- LÓGICA DE MOVIMENTO (Múltiplos de 12.5%) --- */
+        #radio1:checked ~ .first { margin-left: 0; }
+        #radio2:checked ~ .first { margin-left: -12.5%; }
+        #radio3:checked ~ .first { margin-left: -25%; }
+        #radio4:checked ~ .first { margin-left: -37.5%; }
+        #radio5:checked ~ .first { margin-left: -50%; }
+        #radio6:checked ~ .first { margin-left: -62.5%; }
+        #radio7:checked ~ .first { margin-left: -75%; }
+        #radio8:checked ~ .first { margin-left: -87.5%; }
+
+        /* --- NAVEGAÇÃO AUTOMÁTICA (INDICADORES) --- */
+        .navigation-auto {
+            position: absolute;
+            width: 800px;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .navigation-auto div {
+            border: 2px solid #20a6ff;
+            padding: 5px;
+            border-radius: 10px;
+            transition: 0.5s;
+        }
+
+        .navigation-auto div:not(:last-child) {
+            margin-right: 15px; /* Diminuído para caber as 8 bolinhas */
+        }
+
+        /* Destaque das bolinhas */
+        #radio1:checked ~ .navigation-auto .auto-btn1,
+        #radio2:checked ~ .navigation-auto .auto-btn2,
+        #radio3:checked ~ .navigation-auto .auto-btn3,
+        #radio4:checked ~ .navigation-auto .auto-btn4,
+        #radio5:checked ~ .navigation-auto .auto-btn5,
+        #radio6:checked ~ .navigation-auto .auto-btn6,
+        #radio7:checked ~ .navigation-auto .auto-btn7,
+        #radio8:checked ~ .navigation-auto .auto-btn8 {
+            background-color: #20a6ff;
+        }
+
+        /* --- NAVEGAÇÃO MANUAL --- */
+        .manual-navigation {
+            position: absolute;
+            width: 800px;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .manual-btn {
+            border: 2px solid transparent;
+            padding: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 12px;
+            height: 12px;
+        }
+
+        .manual-btn:not(:last-child) {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider">
+        <div class="slides">
+            <input type="radio" name="radio-btn" id="radio1" checked>
+            <input type="radio" name="radio-btn" id="radio2">
+            <input type="radio" name="radio-btn" id="radio3">
+            <input type="radio" name="radio-btn" id="radio4">
+            <input type="radio" name="radio-btn" id="radio5">
+            <input type="radio" name="radio-btn" id="radio6">
+            <input type="radio" name="radio-btn" id="radio7">
+            <input type="radio" name="radio-btn" id="radio8">
+
+            <div class="slide first">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&h=450&auto=format&fit=crop" alt="Academia">
+                <div class="caption">Musculação Pesada</div>
+            </div>
+            
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=800&h=450&auto=format&fit=crop" alt="Calistenia">
+                <div class="caption">Push Ups</div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1598971457999-ca4ef48a9a71?q=80&w=800&h=450&auto=format&fit=crop" alt="Barra Fixa">
+                <div class="caption">Pull-ups Estritas</div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1571731956622-39cf593e640d?q=80&w=800&h=450&auto=format&fit=crop" alt="Treino Funcional">
+                <div class="caption">Alta Performance</div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1590239068178-34610e75982d?q=80&w=800&h=450&auto=format&fit=crop" alt="Muscle Up">
+                <div class="caption">Domínio Corporal</div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2adfcd?q=80&w=800&h=450&auto=format&fit=crop" alt="Peso Livre">
+                <div class="caption">Foco e Disciplina</div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&h=450&auto=format&fit=crop" alt="Treino Geral">
+                <div class="caption">Powerlifting</div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1550345332-09e3ac987658?q=80&w=800&h=450&auto=format&fit=crop" alt="Finalização">
+                <div class="caption">Superação Diária</div>
+            </div>
+
+            <div class="navigation-auto">
+                <div class="auto-btn1"></div>
+                <div class="auto-btn2"></div>
+                <div class="auto-btn3"></div>
+                <div class="auto-btn4"></div>
+                <div class="auto-btn5"></div>
+                <div class="auto-btn6"></div>
+                <div class="auto-btn7"></div>
+                <div class="auto-btn8"></div>
+            </div>
+        </div>
+
+        <div class="manual-navigation">
+            <label for="radio1" class="manual-btn"></label>
+            <label for="radio2" class="manual-btn"></label>
+            <label for="radio3" class="manual-btn"></label>
+            <label for="radio4" class="manual-btn"></label>
+            <label for="radio5" class="manual-btn"></label>
+            <label for="radio6" class="manual-btn"></label>
+            <label for="radio7" class="manual-btn"></label>
+            <label for="radio8" class="manual-btn"></label>
+        </div>
+    </div>
+
+    <script>
+        let counter = 1;
+        
+        // Função de troca automática
+        setInterval(function(){
+            document.getElementById('radio' + counter).checked = true;
+            counter++;
+            
+            if(counter > 8){ // Agora o limite é 8
+                counter = 1;
+            }
+        }, 5000); // 5 segundos por slide
+
+        // Sincroniza o contador se o usuário clicar
+        document.querySelectorAll('.manual-btn').forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                counter = index + 1;
+            });
+        });
+    </script>
+
+</body>
+</html>

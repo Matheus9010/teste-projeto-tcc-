@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site com Carrossel e Boas-vindas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Seção Boas-vindas */
+        .welcome {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .welcome h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .welcome p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Carrossel */
+        .carousel {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .carousel-container {
+            position: relative;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 60px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+            backdrop-filter: blur(10px);
+        }
+
+        .slide-image {
+            flex: 1;
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-right: 40px;
+        }
+
+        .slide-text {
+            flex: 1;
+            color: #333;
+        }
+
+        .slide-text h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .slide-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Botões de navegação */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* Indicadores */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #667eea;
+            transform: scale(1.2);
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .welcome h1 {
+                font-size: 2.5rem;
+            }
+            
+            .carousel-container {
+                height: 300px;
+            }
+            
+            .slide-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            
+            .slide-image {
+                margin-right: 0;
+                margin-bottom: 20px;
+                height: 200px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Seção Boas-vindas -->
+    <section class="welcome">
+        <div class="welcome-content">
+            <h1>Bem-vindo ao AERO FITNESS</h1>
+            <p>Descubra experiências incríveis e conteúdo exclusivo que vão transformar sua navegação na web.</p>
+            <a href="" class=""></a>
+        </div>
+    </section>
+
+    <!-- Carrossel -->
+    <section class="carousel" id="carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <div class="slide-content">
+                    <div class="slide-image" style="background-image: linear-gradient(45deg, #ff9a9e, #fecfef);"></div>
+                    <div class="slide-text">
+                        <h3>🚀 Início Rápido</h3>
+                        <p>Comece sua jornada conosco em poucos cliques. Interface intuitiva e design moderno para uma experiência fluida.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-content">
+                    <div class="slide-image" style="background-image: linear-gradient(45deg, #a8edea, #fed6e3);"></div>
+                    <div class="slide-text">
+                        <h3>✨ Recursos Incríveis</h3>
+                        <p>Explore funcionalidades avançadas que vão surpreender você. Tudo pensado para facilitar sua vida!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-content">
+                    <div class="slide-image" style="background-image: linear-gradient(45deg, #ffecd2, #fcb69f);"></div>
+                    <div class="slide-text">
+                        <h3>💎 Suporte Premium</h3>
+                        <p>Estamos aqui para ajudar 24/7. Nossa equipe está pronta para resolver qualquer dúvida que você tenha.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de navegação -->
+        <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+        <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+
+        <!-- Indicadores -->
+        <div class="carousel-indicators">
+            <span class="indicator active" onclick="currentSlide(1)"></span>
+            <span class="indicator" onclick="currentSlide(2)"></span>
+            <span class="indicator" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(ind => ind.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto-play do carrossel
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Suavização do scroll para o carrossel
+        document.querySelector('.cta-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('carousel').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

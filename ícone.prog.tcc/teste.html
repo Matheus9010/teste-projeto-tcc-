@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aero Fitness — Educação, Saúde e Bem-estar | Paranaguá</title>
+    <meta name="description" content="Aero Fitness: projeto de TCC de Educação Física em Paranaguá. Treinos para a melhor idade, atletas e iniciantes, com acompanhamento de verdade.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========================================
+           VARIÁVEIS DE TEMA (claro / escuro)
+        ======================================== */
+        :root {
+            --azul-escuro: #001f3f;
+            --azul: #002b5e;
+            --azul-medio: #003366;
+            --amarelo: #ffd700;
+            --amarelo-escuro: #e6c200;
+            --ouro-texto: #8f7400;
+            --fundo: #f0f4ff;
+            --superficie: #ffffff;
+            --texto: #1a1a2e;
+            --texto-suave: #46465a;
+            --borda: #d8dde6;
+            --destaque-fundo: #e8f0fe;
+            --sombra: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        body.escuro {
+            --fundo: #12141d;
+            --superficie: #1e2233;
+            --texto: #e9ebf5;
+            --texto-suave: #b6bbd0;
+            --borda: #373d55;
+            --destaque-fundo: #242b45;
+            --sombra: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --ouro-texto: #ffd700;
+        }
+
+        /* ========================================
+           RESET E BASE
+        ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            /* o zoom de acessibilidade atua AQUI, sobre o elemento raiz.
+               como todo o site usa rem, tudo escala junto. */
+            font-size: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.contraste {
+            filter: contrast(1.6) brightness(1.05);
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--amarelo);
+            outline-offset: 2px;
+        }
+
+        /* Link "pular para o conteúdo" — invisível até receber foco */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            background: var(--amarelo);
+            color: var(--azul-escuro);
+            padding: 10px 18px;
+            font-weight: bold;
+            z-index: 999;
+            border-radius: 0 0 8px 0;
+        }
+
+        .skip-link:focus {
+            left: 0;
+        }
+
+        /* ========================================
+           BARRA DE ACESSIBILIDADE (Topo)
+        ======================================== */
+        .acessibilidade {
+            background-color: var(--azul);
+            color: #fff;
+            padding: 6px 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.8125rem;
+            flex-wrap: wrap;
+        }
+
+        .acessibilidade .rotulo {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .acessibilidade button {
+            font-family: inherit;
+        }
+
+        .acessibilidade .btn-fonte {
+            background: var(--amarelo);
+            color: #002b5e;
+            border: none;
+            padding: 2px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            min-width: 40px;
+        }
+
+        .acessibilidade .btn-fonte:hover {
+            background: var(--amarelo-escuro);
+        }
+
+        .acessibilidade .nivel-zoom {
+            color: #fff;
+            font-weight: bold;
+            min-width: 46px;
+            text-align: center;
+        }
+
+        .acessibilidade .btn-recurso {
+            background: transparent;
+            color: var(--amarelo);
+            border: 1px solid transparent;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8125rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .acessibilidade .btn-recurso:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .acessibilidade .btn-recurso[aria-pressed="true"] {
+            background: var(--amarelo);
+            color: #002b5e;
+        }
+
+        /* ========================================
+           HEADER / LOGO E TÍTULO
+        ======================================== */
+        .header-top {
+            background: linear-gradient(135deg, #001f3f, #003366);
+            padding: 22px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 4px solid var(--amarelo);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-area .logo-icon {
+            width: 58px;
+            height: 58px;
+            background: var(--amarelo);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.625rem;
+            color: #001f3f;
+            flex-shrink: 0;
+        }
+
+        .logo-area h1 {
+            color: #fff;
+            font-size: 1.75rem;
+            letter-spacing: 2px;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .logo-area h1 span {
+            color: var(--amarelo);
+        }
+
+        .logo-area .subtitle {
+            color: #aac9ff;
+            font-size: 0.875rem;
+            display: block;
+        }
+
+        .header-top .slogan {
+            color: var(--amarelo);
+            font-style: italic;
+            font-size: 1rem;
+            text-align: right;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        /* ========================================
+           NAVEGAÇÃO PRINCIPAL
+        ======================================== */
+        .nav-principal {
+            background-color: var(--azul);
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--amarelo);
+        }
+
+        .nav-principal a {
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 22px;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-principal a:hover,
+        .nav-principal a.active {
+            background-color: rgba(255, 215, 0, 0.15);
+            border-bottom-color: var(--amarelo);
+            color: var(--amarelo);
+        }
+
+        /* ========================================
+           CONTEÚDO PRINCIPAL
+        ======================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .section { animation: none; }
+            * { scroll-behavior: auto !important; transition: none !important; }
+        }
+
+        .section h2 {
+            color: var(--azul-escuro);
+            font-size: 2rem;
+            margin-bottom: 18px;
+            border-left: 5px solid var(--amarelo);
+            padding-left: 15px;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        body.escuro .section h2 {
+            color: var(--amarelo);
+        }
+
+        .section h2 i {
+            color: var(--ouro-texto);
+            margin-right: 10px;
+        }
+
+        .section > p {
+            font-size: 1.0625rem;
+            color: var(--texto-suave);
+            margin-bottom: 15px;
+            max-width: 70ch;
+        }
+
+        .section p strong {
+            color: var(--texto);
+        }
+
+        /* ===== CHAMADA DE ABERTURA (Início) ===== */
+        .intro {
+            background: var(--superficie);
+            border-radius: 12px;
+            padding: 30px 35px;
+            box-shadow: var(--sombra);
+            border-top: 4px solid var(--amarelo);
+            margin-bottom: 25px;
+        }
+
+        .intro .chamada {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.5rem;
+            color: var(--texto);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            font-size: 1.0625rem;
+            color: var(--texto-suave);
+            margin-bottom: 10px;
+        }
+
+        /* ===== FAIXA DE NÚMEROS ===== */
+        .stats {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 18px 5px;
+            margin: 5px 0 25px;
+            border-top: 2px solid var(--amarelo);
+            border-bottom: 2px solid var(--amarelo);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.875rem;
+            color: var(--azul-escuro);
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        body.escuro .stat strong {
+            color: var(--amarelo);
+        }
+
+        .stat span {
+            font-size: 0.9375rem;
+            color: var(--texto-suave);
+        }
+
+        /* ===== CARDS ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--superficie);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--sombra);
+            border-top: 4px solid var(--amarelo);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.14);
+        }
+
+        .card .icon {
+            font-size: 1.875rem;
+            color: var(--ouro-texto);
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            color: var(--texto);
+            margin-bottom: 10px;
+            font-size: 1.125rem;
+        }
+
+        .card p {
+            font-size: 0.9375rem;
+            color: var(--texto-suave);
+            margin-bottom: 8px;
+        }
+
+        .card p i {
+            color: var(--ouro-texto);
+        }
+
+        /* ===== DEPOIMENTO ===== */
+        .depoimento {
+            background: var(--superficie);
+            border-left: 5px solid var(--amarelo);
+            border-radius: 0 12px 12px 0;
+            box-shadow: var(--sombra);
+            padding: 22px 28px;
+            margin-top: 25px;
+        }
+
+        .depoimento blockquote {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-style: italic;
+            font-size: 1.125rem;
+            color: var(--texto);
+            margin-bottom: 8px;
+        }
+
+        .depoimento cite {
+            font-style: normal;
+            font-size: 0.9375rem;
+            color: var(--texto-suave);
+        }
+
+        /* ===== LISTAS EM COLUNAS ===== */
+        .listas-colunas {
+            display: flex;
+            gap: 30px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .listas-colunas ul {
+            background: var(--superficie);
+            padding: 20px 30px 20px 40px;
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            min-width: 200px;
+            border-left: 4px solid var(--amarelo);
+            list-style: none;
+        }
+
+        .listas-colunas ul li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: var(--texto-suave);
+        }
+
+        .listas-colunas ul li strong {
+            color: var(--texto);
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.0625rem;
+        }
+
+        /* ===== TABELA DE HORÁRIOS ===== */
+        .tabela-horarios {
+            width: 100%;
+            max-width: 640px;
+            border-collapse: collapse;
+            background: var(--superficie);
+            box-shadow: var(--sombra);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .tabela-horarios caption {
+            text-align: left;
+            font-weight: bold;
+            color: var(--texto);
+            padding: 12px 16px 4px;
+            font-size: 1.0625rem;
+        }
+
+        .tabela-horarios th,
+        .tabela-horarios td {
+            padding: 11px 16px;
+            text-align: left;
+            font-size: 0.9375rem;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .tabela-horarios thead th {
+            background: var(--azul);
+            color: #fff;
+        }
+
+        .tabela-horarios tbody tr:hover {
+            background: var(--destaque-fundo);
+        }
+
+        .tabela-horarios td {
+            color: var(--texto-suave);
+        }
+
+        .tabela-horarios td:first-child {
+            font-weight: 600;
+            color: var(--texto);
+            white-space: nowrap;
+        }
+
+        /* ===== CAIXAS DE DESTAQUE / AVISO ===== */
+        .caixa-aviso {
+            background: var(--destaque-fundo);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .caixa-aviso p {
+            color: var(--texto);
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .caixa-aviso i {
+            color: var(--ouro-texto);
+        }
+
+        /* ===== FORMULÁRIO ===== */
+        .form-container {
+            background: var(--superficie);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        .form-container h3 {
+            color: var(--texto);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--texto);
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--borda);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--superficie);
+            color: var(--texto);
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--amarelo);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.25);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #001f3f, #003366);
+            color: #fff;
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.125rem;
+            font-weight: bold;
+            font-family: inherit;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #003366, #004488);
+            transform: scale(1.01);
+            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.3);
+        }
+
+        .btn-submit.btn-perigo {
+            background: #c0392b;
+        }
+
+        .btn-submit.btn-perigo:hover {
+            background: #a93226;
+        }
+
+        /* ===== LOGIN ===== */
+        .login-box {
+            background: var(--superficie);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            max-width: 450px;
+            margin: 20px auto;
+        }
+
+        .login-box h3 {
+            color: var(--texto);
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        .login-box .login-icon {
+            text-align: center;
+            font-size: 3.75rem;
+            color: var(--ouro-texto);
+            margin-bottom: 15px;
+        }
+
+        .login-status {
+            background: var(--destaque-fundo);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--texto);
+            font-size: 0.9375rem;
+        }
+
+        .login-status .user-name {
+            font-weight: bold;
+            color: var(--amarelo);
+            background: #001f3f;
+            padding: 2px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .nota-teste {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.875rem;
+            color: var(--texto-suave);
+        }
+
+        /* ===== CONFIGURAÇÕES ===== */
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .config-item {
+            background: var(--superficie);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            border-left: 4px solid var(--amarelo);
+        }
+
+        .config-item h4 {
+            color: var(--texto);
+            margin-bottom: 8px;
+        }
+
+        .config-item p {
+            font-size: 0.875rem;
+            color: var(--texto-suave);
+        }
+
+        .config-item select {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 6px;
+            border: 2px solid var(--borda);
+            width: 100%;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--superficie);
+            color: var(--texto);
+        }
+
+        .toggle {
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+            background: #b9b9c4;
+            border: none;
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 8px;
+            padding: 0;
+        }
+
+        .toggle[aria-checked="true"] {
+            background: var(--amarelo);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: #fff;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .toggle[aria-checked="true"]::after {
+            transform: translateX(22px);
+        }
+
+        .zoom-config {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .zoom-config .btn-fonte {
+            background: var(--azul);
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .zoom-config .btn-fonte:hover {
+            background: var(--azul-medio);
+        }
+
+        .zoom-config .nivel {
+            font-weight: bold;
+            color: var(--texto);
+            min-width: 46px;
+            text-align: center;
+        }
+
+        /* ========================================
+           RODAPÉ
+        ======================================== */
+        .footer {
+            background: linear-gradient(135deg, #001f3f, #002b5e);
+            color: #fff;
+            padding: 30px 40px 15px;
+            margin-top: 40px;
+            border-top: 4px solid var(--amarelo);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer h4 {
+            color: var(--amarelo);
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .footer p,
+        .footer a {
+            color: #cce0ff;
+            font-size: 0.875rem;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .footer a:hover {
+            color: var(--amarelo);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8125rem;
+            color: #aac9ff;
+        }
+
+        /* ========================================
+           MENSAGEM DE FEEDBACK
+        ======================================== */
+        .feedback {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: none;
+            font-weight: bold;
+            font-size: 0.9375rem;
+        }
+
+        .feedback.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* ========================================
+           RESPONSIVIDADE
+        ======================================== */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .header-top .slogan {
+                text-align: center;
+                margin-top: 8px;
+            }
+
+            .logo-area h1 {
+                font-size: 1.375rem;
+            }
+
+            .nav-principal a {
+                padding: 10px 14px;
+                font-size: 0.8125rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro {
+                padding: 20px;
+            }
+
+            .intro .chamada {
+                font-size: 1.1875rem;
+            }
+
+            .stats {
+                gap: 22px;
+            }
+
+            .listas-colunas {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .form-container,
+            .login-box {
+                padding: 20px;
+            }
+
+            .acessibilidade {
+                justify-content: center;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-area .logo-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.375rem;
+            }
+
+            .nav-principal {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-principal a {
+                width: 100%;
+                justify-content: center;
+                padding: 10px;
+            }
+
+            .cards-grid,
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tabela-horarios {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+    <!-- ========================================
+    BARRA DE ACESSIBILIDADE
+    ======================================== -->
+    <div class="acessibilidade" role="region" aria-label="Barra de acessibilidade">
+        <span class="rotulo"><i class="fas fa-universal-access" aria-hidden="true"></i> Acessibilidade:</span>
+        <button type="button" class="btn-fonte" id="btnDiminuir" aria-label="Diminuir tamanho da fonte">A-</button>
+        <span class="nivel-zoom" id="nivelZoom" aria-live="polite">100%</span>
+        <button type="button" class="btn-fonte" id="btnAumentar" aria-label="Aumentar tamanho da fonte">A+</button>
+        <button type="button" class="btn-recurso" id="btnContrasteBarra" aria-pressed="false">
+            <i class="fas fa-eye" aria-hidden="true"></i> Alto Contraste
+        </button>
+        <button type="button" class="btn-recurso" id="btnNarradorBarra" aria-pressed="false">
+            <i class="fas fa-volume-up" aria-hidden="true"></i> Narrador
+        </button>
+    </div>
+
+    <!-- ========================================
+    HEADER
+    ======================================== -->
+    <header class="header-top">
+        <div class="logo-area">
+            <div class="logo-icon" aria-hidden="true"><i class="fas fa-dumbbell"></i></div>
+            <div>
+                <h1>AERO <span>FITNESS</span></h1>
+                <span class="subtitle">Projeto de TCC em Educação Física — Paranaguá, PR</span>
+            </div>
+        </div>
+        <p class="slogan">Movimento é vida.<br>E vida se faz todo dia.</p>
+    </header>
+
+    <!-- ========================================
+    NAVEGAÇÃO
+    ======================================== -->
+    <nav class="nav-principal" aria-label="Navegação principal">
+        <a href="#inicio" class="active" data-section="inicio" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Início</a>
+        <a href="#sobre" data-section="sobre"><i class="fas fa-users" aria-hidden="true"></i> Sobre Nós</a>
+        <a href="#lugares" data-section="lugares"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Lugares</a>
+        <a href="#treinos" data-section="treinos"><i class="fas fa-dumbbell" aria-hidden="true"></i> Tipos de Treino</a>
+        <a href="#contato" data-section="contato"><i class="fas fa-envelope" aria-hidden="true"></i> Contato</a>
+        <a href="#cadastro" data-section="cadastro"><i class="fas fa-user-plus" aria-hidden="true"></i> Cadastre-se</a>
+        <a href="#login" data-section="login"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login</a>
+        <a href="#config" data-section="config"><i class="fas fa-cog" aria-hidden="true"></i> Configurações</a>
+    </nav>
+
+    <!-- ========================================
+    CONTEÚDO PRINCIPAL
+    ======================================== -->
+    <main class="container" id="conteudo">
+
+        <!-- ===== INÍCIO ===== -->
+        <section id="inicio" class="section active" aria-labelledby="titulo-inicio">
+            <h2 id="titulo-inicio" tabindex="-1"><i class="fas fa-home" aria-hidden="true"></i> Início</h2>
+
+            <div class="intro">
+                <p class="chamada">Academia boa é a que cabe na sua vida — seja você a dona Marlene, que começou a caminhar aos 67, ou um atleta se preparando para competição.</p>
+                <p>A Aero Fitness nasceu em Paranaguá como projeto de conclusão do curso de Educação Física, com um foco bem claro: <strong>melhor idade e atletas</strong> — dois públicos que costumam ficar esquecidos nas academias comuns. Aqui, cada treino tem professor olhando, cada exercício tem um porquê e ninguém é só mais um número na catraca.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat"><strong>120+</strong><span>alunos acompanhados</span></div>
+                <div class="stat"><strong>6</strong><span>modalidades de treino</span></div>
+                <div class="stat"><strong>2023</strong><span>ano de fundação do projeto</span></div>
+                <div class="stat"><strong>15</strong><span>alunos por turma, no máximo</span></div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Saúde antes de tudo</h3>
+                    <p>Todo aluno novo passa por uma avaliação inicial com um professor. Sem exceção. A gente só monta o treino depois de conhecer seus limites e seu histórico.</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-user-check"></i></div>
+                    <h3>Turmas pequenas</h3>
+                    <p>No máximo 15 pessoas por aula. Assim o professor corrige o seu agachamento de verdade, em vez de gritar instruções genéricas do canto da sala.</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
+                    <h3>Educação física de verdade</h3>
+                    <p>Você aprende o porquê de cada exercício: quantas séries, quando descansar, quando aumentar a carga. Nada de decorar treino pronto.</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-hands-holding-heart" aria-hidden="true"></i></div>
+                    <h3>Melhor idade bem-vinda</h3>
+                    <p>Mais da metade dos nossos alunos tem 60 anos ou mais. Os treinos são adaptados às articulações e ao ritmo de cada um — adaptados, nunca "diminuídos".</p>
+                </div>
+            </div>
+
+            <div class="depoimento">
+                <blockquote>"Eu achava que academia não era lugar para mim. Hoje venho três vezes por semana, durmo melhor e até o joelho parou de reclamar."</blockquote>
+                <cite>— Marlene Souza, 67 anos, aluna desde 2024</cite>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3 style="color: var(--texto); margin-bottom: 15px; font-size: 1.25rem;">O que você encontra por aqui</h3>
+                <div class="listas-colunas">
+                    <ul>
+                        <li><strong>Exercícios básicos</strong></li>
+                        <li>Flexão de braço</li>
+                        <li>Agachamento</li>
+                        <li>Prancha</li>
+                        <li>Alongamento</li>
+                        <li>Caminhada orientada</li>
+                    </ul>
+                    <ul>
+                        <li><strong>Modalidades</strong></li>
+                        <li>Musculação</li>
+                        <li>Funcional</li>
+                        <li>Pilates</li>
+                        <li>Yoga</li>
+                        <li>Hidroginástica</li>
+                    </ul>
+                    <ul>
+                        <li><strong>Bem-estar no dia a dia</strong></li>
+                        <li>Respiração e relaxamento</li>
+                        <li>Alimentação equilibrada</li>
+                        <li>Hidratação</li>
+                        <li>Sono de qualidade</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SOBRE NÓS ===== -->
+        <section id="sobre" class="section" aria-labelledby="titulo-sobre">
+            <h2 id="titulo-sobre" tabindex="-1"><i class="fas fa-users" aria-hidden="true"></i> Sobre Nós</h2>
+
+            <div class="intro">
+                <p class="chamada">A Aero Fitness começou como um trabalho de faculdade — e virou compromisso.</p>
+                <p>O projeto nasceu em 2023, como Trabalho de Conclusão de Curso de Educação Física. A inquietação era simples: por que a academia parece feita só para quem já é jovem e treinado? Fomos atrás de resposta conversando com aposentados, atletas amadores e professores de Paranaguá. O resultado virou este projeto: um espaço onde a atividade física é tratada como direito de todos — com segurança, paciência e bom humor.</p>
+                <p>O nome vem de "aero", de aeróbico. Mas também da vontade de ver a cidade inteira se mexendo.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-bullseye"></i></div>
+                    <h3>Missão</h3>
+                    <p>Levar qualidade de vida por meio do movimento, com treino sério e acompanhamento próximo — sem fórmula pronta e sem julgamento.</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-eye"></i></div>
+                    <h3>Visão</h3>
+                    <p>Ser referência em Paranaguá no cuidado com a melhor idade e na preparação de atletas, provando que dá para treinar bem em qualquer idade.</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-handshake" aria-hidden="true"></i></div>
+                    <h3>Valores</h3>
+                    <p>Respeito ao corpo de cada um, inclusão de verdade, segurança em primeiro lugar e educação — porque aluno informado se machuca menos.</p>
+                </div>
+            </div>
+
+            <div class="caixa-aviso" style="background: var(--superficie); border-left: 5px solid var(--amarelo); box-shadow: var(--sombra);">
+                <h3 style="color: var(--texto); font-size: 1.125rem; margin-bottom: 8px;">Para quem é a Aero Fitness?</h3>
+                <ul style="padding-left: 25px; margin-top: 10px; color: var(--texto-suave);">
+                    <li><strong style="color: var(--texto);">Melhor idade:</strong> turmas adaptadas, com acompanhamento de perto e progressão no seu ritmo.</li>
+                    <li><strong style="color: var(--texto);">Atletas:</strong> treinos de força, condicionamento e recuperação pensados para a sua modalidade.</li>
+                    <li><strong style="color: var(--texto);">Iniciantes:</strong> avaliação inicial e orientação passo a passo, para começar sem medo e sem lesão.</li>
+                    <li><strong style="color: var(--texto);">Todo mundo:</strong> se você quer se mexer mais e melhor, tem lugar aqui.</li>
+                </ul>
+            </div>
+
+            <div class="cards-grid" style="margin-top: 25px;">
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-user-tie"></i></div>
+                    <h3>Prof. Marcos Vinícius</h3>
+                    <p>Coordenador do projeto. Especialista em treinamento para a terceira idade e o chato da avaliação inicial (no bom sentido).</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-user-nurse" aria-hidden="true"></i></div>
+                    <h3>Profa. Juliana Ribeiro</h3>
+                    <p>Responsável pelas turmas de pilates, yoga e hidroginástica. Fã declarada de alongamento bem feito.</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-stopwatch" aria-hidden="true"></i></div>
+                    <h3>Prof. André Santos</h3>
+                    <p>Preparador físico dos atletas. Se o seu treino pareceu fácil, fala com ele — ele resolve na hora.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LUGARES ===== -->
+        <section id="lugares" class="section" aria-labelledby="titulo-lugares">
+            <h2 id="titulo-lugares" tabindex="-1"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Lugares</h2>
+            <p>Trabalhamos em três espaços em Paranaguá. Todos com acesso facilitado para cadeirantes e pessoas com mobilidade reduzida — isso para a gente não é diferencial, é obrigação.</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-building"></i></div>
+                    <h3>Matriz — Estradinha</h3>
+                    <p>Alameda Cel. Elizio Pereira, S/N — Estradinha, Paranaguá — PR.</p>
+                    <p>Sala de musculação, estúdio de funcional e área de alongamento.</p>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i> (41) 3423-4131</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-tree" aria-hidden="true"></i></div>
+                    <h3>Parque Urbano</h3>
+                    <p>Nossas caminhadas orientadas e aulas ao ar livre acontecem aqui: pista de caminhada, aparelhos de ginástica e sombra de árvore de verdade.</p>
+                </div>
+                <div class="card">
+                    <div class="icon" aria-hidden="true"><i class="fas fa-person-swimming" aria-hidden="true"></i></div>
+                    <h3>Centro Aquático</h3>
+                    <p>Piscina aquecida para hidroginástica e atividades aquáticas. A queridinha da turma da melhor idade — e dos joelhos deles.</p>
+                </div>
+            </div>
+
+            <table class="tabela-horarios">
+                <caption>Horário de funcionamento — Matriz</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Dia</th>
+                        <th scope="col">Abertura</th>
+                        <th scope="col">Fechamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Segunda a sexta</td><td>6h30</td><td>21h30</td></tr>
+                    <tr><td>Sábado</td><td>8h</td><td>12h</td></tr>
+                    <tr><td>Domingo e feriados</td><td colspan="2">Fechado — dia de descanso, que também é treino</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== TIPOS DE TREINO ===== -->
+        <section id="treinos" class="section" aria-labelledby="titulo-treinos">
+            <h2 id="titulo-treinos" tabindex="-1"><i class="fas fa-dumbbell" aria-hidden="true"></i> Tipos de Treino</h2>
+            <p>Não existe "o melhor treino" — existe o treino certo para o seu corpo e o seu objetivo. Estas são as modalidades que trabalhamos hoje:</p>
+
+            <div class="listas-colunas">
+                <ul>
+                    <li><strong>Musculação</strong></li>
+                    <li>Treino de força</li>
+                    <li>Hipertrofia</li>
+                    <li>Tonificação</li>
+                    <li>Fortalecimento ósseo (essencial após os 50)</li>
+                </ul>
+                <ul>
+                    <li><strong>Pilates e Yoga</strong></li>
+                    <li>Flexibilidade</li>
+                    <li>Equilíbrio e postura</li>
+                    <li>Controle corporal</li>
+                    <li>Alívio de dores nas costas</li>
+                </ul>
+                <ul>
+                    <li><strong>Cardio</strong></li>
+                    <li>Caminhada orientada</li>
+                    <li>Corrida progressiva</li>
+                    <li>Bicicleta ergométrica</li>
+                </ul>
+                <ul>
+                    <li><strong>Funcional</strong></li>
+                    <li>Circuito</li>
+                    <li>Agilidade e coordenação</li>
+                    <li>Resistência para o dia a dia</li>
+                </ul>
+                <ul>
+                    <li><strong>Hidroginástica</strong></li>
+                    <li>Baixo impacto nas articulações</li>
+                    <li>Indicada para artrite e sobrepeso</li>
+                    <li>Turmas manhã e tarde</li>
+                </ul>
+            </div>
+
+            <table class="tabela-horarios">
+                <caption>Grade de aulas coletivas da semana</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Horário</th>
+                        <th scope="col">Aula</th>
+                        <th scope="col">Dias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>7h</td><td>Caminhada orientada (Parque Urbano)</td><td>Seg, Qua e Sex</td></tr>
+                    <tr><td>9h</td><td>Hidroginástica (Centro Aquático)</td><td>Ter e Qui</td></tr>
+                    <tr><td>14h</td><td>Hidroginástica (Centro Aquático)</td><td>Seg, Qua e Sex</td></tr>
+                    <tr><td>18h</td><td>Musculação orientada (Matriz)</td><td>Seg a Sex</td></tr>
+                    <tr><td>19h</td><td>Funcional (Matriz)</td><td>Ter e Qui</td></tr>
+                    <tr><td>20h</td><td>Yoga (Matriz)</td><td>Seg e Qua</td></tr>
+                </tbody>
+            </table>
+
+            <div class="caixa-aviso">
+                <p><i class="fas fa-lightbulb" aria-hidden="true"></i> Antes de começar qualquer modalidade, converse com um profissional de educação física. E se sentir dor que não é a "dor boa" do treino, pare e avise o professor.</p>
+            </div>
+        </section>
+
+        <!-- ===== CONTATO ===== -->
+        <section id="contato" class="section" aria-labelledby="titulo-contato">
+            <h2 id="titulo-contato" tabindex="-1"><i class="fas fa-envelope" aria-hidden="true"></i> Contato</h2>
+            <p>Dúvida sobre horários, quer agendar uma visita ou conversar sobre qual treino combina com você? Manda mensagem aqui ou liga para a gente — respondemos em até um dia útil.</p>
+
+            <div class="form-container">
+                <h3>Envie sua mensagem</h3>
+                <div class="feedback" id="feedbackContato" role="status" aria-live="polite"></div>
+                <form id="formContato" novalidate>
+                    <div class="form-group">
+                        <label for="nomeContato"><i class="fas fa-user" aria-hidden="true"></i> Nome completo</label>
+                        <input type="text" id="nomeContato" name="nome" placeholder="Digite seu nome" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailContato"><i class="fas fa-envelope" aria-hidden="true"></i> E-mail</label>
+                        <input type="email" id="emailContato" name="email" placeholder="Digite seu e-mail" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefoneContato"><i class="fas fa-phone" aria-hidden="true"></i> Telefone</label>
+                        <input type="tel" id="telefoneContato" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagemContato"><i class="fas fa-comment" aria-hidden="true"></i> Mensagem</label>
+                        <textarea id="mensagemContato" name="mensagem" placeholder="Escreva sua mensagem..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px; color: var(--texto-suave);">
+                <p><i class="fas fa-phone" aria-hidden="true" style="color: var(--ouro-texto);"></i> (41) 3423-4131</p>
+                <p><i class="fas fa-envelope" aria-hidden="true" style="color: var(--ouro-texto);"></i> contato@aerofitness.com.br</p>
+                <p><i class="fas fa-map-marker-alt" aria-hidden="true" style="color: var(--ouro-texto);"></i> Alameda Cel. Elizio Pereira, S/N — Estradinha, Paranaguá — PR</p>
+            </div>
+        </section>
+
+        <!-- ===== CADASTRO ===== -->
+        <section id="cadastro" class="section" aria-labelledby="titulo-cadastro">
+            <h2 id="titulo-cadastro" tabindex="-1"><i class="fas fa-user-plus" aria-hidden="true"></i> Cadastre-se</h2>
+            <p>Crie sua conta para receber a grade de aulas atualizada, dicas de treino e os avisos de feriado (ninguém merece acordar 6h à toa).</p>
+
+            <div class="form-container">
+                <h3>Formulário de Cadastro</h3>
+                <div class="feedback" id="feedbackCadastro" role="status" aria-live="polite"></div>
+                <form id="formCadastro" novalidate>
+                    <div class="form-group">
+                        <label for="nomeCadastro"><i class="fas fa-user" aria-hidden="true"></i> Nome completo</label>
+                        <input type="text" id="nomeCadastro" name="nome" placeholder="Digite seu nome completo" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailCadastro"><i class="fas fa-envelope" aria-hidden="true"></i> E-mail</label>
+                        <input type="email" id="emailCadastro" name="email" placeholder="Digite seu e-mail" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataNascimento"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Data de nascimento</label>
+                        <input type="date" id="dataNascimento" name="nascimento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefoneCadastro"><i class="fas fa-phone" aria-hidden="true"></i> Telefone</label>
+                        <input type="tel" id="telefoneCadastro" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="generoCadastro"><i class="fas fa-venus-mars" aria-hidden="true"></i> Gênero</label>
+                        <select id="generoCadastro" name="genero">
+                            <option value="">Selecione...</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminino</option>
+                            <option value="outro">Outro</option>
+                            <option value="nao-informar">Prefiro não informar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="senhaCadastro"><i class="fas fa-lock" aria-hidden="true"></i> Senha</label>
+                        <input type="password" id="senhaCadastro" name="senha" placeholder="Crie uma senha (mínimo 6 caracteres)" required minlength="6" autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmarSenha"><i class="fas fa-check-circle" aria-hidden="true"></i> Confirmar senha</label>
+                        <input type="password" id="confirmarSenha" name="confirmar" placeholder="Repita a senha" required autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i> Cadastrar
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== LOGIN ===== -->
+        <section id="login" class="section" aria-labelledby="titulo-login">
+            <h2 id="titulo-login" tabindex="-1"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login</h2>
+            <p>Entre na sua conta para acompanhar seus treinos e receber os avisos da semana.</p>
+
+            <div class="login-box">
+                <div class="login-icon" aria-hidden="true"><i class="fas fa-user-circle"></i></div>
+                <h3>Entrar na sua conta</h3>
+                <div class="login-status" id="loginStatus" role="status">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span id="statusTexto">Você não está logado</span>
+                </div>
+                <div class="feedback" id="feedbackLogin" role="status" aria-live="polite"></div>
+                <form id="formLogin" novalidate>
+                    <div class="form-group">
+                        <label for="emailLogin"><i class="fas fa-envelope" aria-hidden="true"></i> E-mail</label>
+                        <input type="email" id="emailLogin" name="email" placeholder="Digite seu e-mail" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="senhaLogin"><i class="fas fa-lock" aria-hidden="true"></i> Senha</label>
+                        <input type="password" id="senhaLogin" name="senha" placeholder="Digite sua senha" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn-submit" id="btnLogin">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Entrar
+                    </button>
+                    <button type="button" class="btn-submit btn-perigo" id="btnLogout" style="display:none; margin-top: 10px;">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Sair
+                    </button>
+                </form>
+                <p class="nota-teste">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i> Modo de teste: qualquer e-mail válido com senha de 6+ caracteres entra.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== CONFIGURAÇÕES ===== -->
+        <section id="config" class="section" aria-labelledby="titulo-config">
+            <h2 id="titulo-config" tabindex="-1"><i class="fas fa-cog" aria-hidden="true"></i> Configurações</h2>
+            <p>Ajuste o site do jeito que fica mais confortável para você. Tudo é salvo no seu navegador — na próxima visita, está como você deixou.</p>
+
+            <div class="config-grid">
+                <div class="config-item">
+                    <h4><i class="fas fa-font" aria-hidden="true"></i> Tamanho da fonte</h4>
+                    <p>Aumenta ou diminui o texto de todas as páginas do site (de 80% a 150%).</p>
+                    <div class="zoom-config">
+                        <button type="button" class="btn-fonte" id="btnDiminuirConfig" aria-label="Diminuir tamanho da fonte">A-</button>
+                        <span class="nivel" id="nivelZoomConfig">100%</span>
+                        <button type="button" class="btn-fonte" id="btnAumentarConfig" aria-label="Aumentar tamanho da fonte">A+</button>
+                    </div>
+                </div>
+
+                <div class="config-item">
+                    <h4><i class="fas fa-adjust" aria-hidden="true"></i> Modo escuro</h4>
+                    <p>Fundo escuro e texto claro, para cansar menos a vista à noite.</p>
+                    <button type="button" class="toggle" id="toggleDark" role="switch" aria-checked="false" aria-label="Ativar modo escuro"></button>
+                </div>
+
+                <div class="config-item">
+                    <h4><i class="fas fa-eye" aria-hidden="true"></i> Alto contraste</h4>
+                    <p>Aumenta o contraste das cores para facilitar a leitura.</p>
+                    <button type="button" class="toggle" id="toggleContrast" role="switch" aria-checked="false" aria-label="Ativar alto contraste"></button>
+                </div>
+
+                <div class="config-item">
+                    <h4><i class="fas fa-volume-up" aria-hidden="true"></i> Narrador</h4>
+                    <p>Lê em voz alta o texto sobre o qual você passar o mouse.</p>
+                    <button type="button" class="toggle" id="toggleSpeech" role="switch" aria-checked="false" aria-label="Ativar narrador"></button>
+                </div>
+
+                <div class="config-item">
+                    <h4><i class="fas fa-language" aria-hidden="true"></i> Idioma</h4>
+                    <p>Idioma de preferência (em breve).</p>
+                    <select id="idiomaSelect" aria-label="Selecionar idioma">
+                        <option value="pt">Português</option>
+                        <option value="en" disabled>English (em breve)</option>
+                        <option value="es" disabled>Español (em breve)</option>
+                    </select>
+                </div>
+
+                <div class="config-item">
+                    <h4><i class="fas fa-bell" aria-hidden="true"></i> Notificações</h4>
+                    <p>Avisos sobre mudanças de horário e novas turmas.</p>
+                    <button type="button" class="toggle" id="toggleNotifications" role="switch" aria-checked="true" aria-label="Ativar notificações"></button>
+                </div>
+            </div>
+
+            <div class="caixa-aviso" style="text-align: center; margin-top: 25px;">
+                <p><i class="fas fa-info-circle" aria-hidden="true"></i> Suas preferências ficam salvas apenas neste navegador.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================
+    RODAPÉ
+    ======================================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4><i class="fas fa-dumbbell" aria-hidden="true"></i> AERO FITNESS</h4>
+                <p>Educação, saúde e bem-estar em Paranaguá.</p>
+                <p><i class="fas fa-phone" aria-hidden="true"></i> (41) 3423-4131</p>
+                <p><i class="fas fa-envelope" aria-hidden="true"></i> contato@aerofitness.com.br</p>
+            </div>
+            <div>
+                <h4>Links Rápidos</h4>
+                <a href="#inicio" data-section="inicio">Início</a>
+                <a href="#sobre" data-section="sobre">Sobre Nós</a>
+                <a href="#lugares" data-section="lugares">Lugares</a>
+                <a href="#treinos" data-section="treinos">Tipos de Treino</a>
+            </div>
+            <div>
+                <h4>Suporte</h4>
+                <a href="#contato" data-section="contato">Contato</a>
+                <a href="#cadastro" data-section="cadastro">Cadastre-se</a>
+                <a href="#login" data-section="login">Login</a>
+                <a href="#config" data-section="config">Configurações</a>
+            </div>
+            <div>
+                <h4>Redes Sociais</h4>
+                <a href="#" aria-label="Instagram da Aero Fitness"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a>
+                <a href="#" aria-label="Facebook da Aero Fitness"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a>
+                <a href="#" aria-label="WhatsApp da Aero Fitness"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+                <a href="#" aria-label="YouTube da Aero Fitness"><i class="fab fa-youtube" aria-hidden="true"></i> YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aero Fitness — Projeto de TCC, curso de Educação Física. Todos os direitos reservados.</p>
+            <p style="font-size: 0.75rem; color: #88aadd;">Feito com dedicação para a melhor idade e para quem quer se mexer.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================
+    SCRIPTS
+    ======================================== -->
+    <script>
+        // ============================================
+        // NAVEGAÇÃO ENTRE SEÇÕES
+        // ============================================
+        function mostrarSecao(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(id);
+            if (!target) return;
+
+            target.classList.add('active');
+
+            // Atualiza estado ativo na navegação
+            document.querySelectorAll('.nav-principal a').forEach(l => {
+                l.classList.remove('active');
+                l.removeAttribute('aria-current');
+            });
+            const linkAtivo = document.querySelector('.nav-principal a[data-section="' + id + '"]');
+            if (linkAtivo) {
+                linkAtivo.classList.add('active');
+                linkAtivo.setAttribute('aria-current', 'page');
+            }
+
+            // Leva o foco ao título da seção (leitores de tela) e rola até o conteúdo
+            const titulo = target.querySelector('h2');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (titulo) titulo.focus({ preventScroll: true });
+        }
+
+        // Menu principal E links do rodapé usam data-section
+        document.querySelectorAll('a[data-section]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                mostrarSecao(this.dataset.section);
+            });
+        });
+
+        // Links de redes sociais (ainda sem página) não devem pular o scroll
+        document.querySelectorAll('a[href="#"]').forEach(a => {
+            a.addEventListener('click', e => e.preventDefault());
+        });
+
+        // ============================================
+        // ACESSIBILIDADE — ZOOM DA FONTE (todas as páginas)
+        // Como todo o CSS usa "rem", mudar o font-size do
+        // elemento <html> escala o site inteiro de uma vez.
+        // ============================================
+        const ZOOM_MIN = 80;
+        const ZOOM_MAX = 150;
+        const ZOOM_PASSO = 10;
+        let zoom = 100;
+
+        function aplicarZoom() {
+            document.documentElement.style.fontSize = zoom + '%';
+            document.getElementById('nivelZoom').textContent = zoom + '%';
+            document.getElementById('nivelZoomConfig').textContent = zoom + '%';
+            salvarConfig('zoom', zoom);
+        }
+
+        function aumentarFonte() {
+            zoom = Math.min(zoom + ZOOM_PASSO, ZOOM_MAX);
+            aplicarZoom();
+        }
+
+        function diminuirFonte() {
+            zoom = Math.max(zoom - ZOOM_PASSO, ZOOM_MIN);
+            aplicarZoom();
+        }
+
+        document.getElementById('btnAumentar').addEventListener('click', aumentarFonte);
+        document.getElementById('btnDiminuir').addEventListener('click', diminuirFonte);
+        document.getElementById('btnAumentarConfig').addEventListener('click', aumentarFonte);
+        document.getElementById('btnDiminuirConfig').addEventListener('click', diminuirFonte);
+
+        // ============================================
+        // MODO ESCURO
+        // ============================================
+        function definirEscuro(ativo) {
+            document.body.classList.toggle('escuro', ativo);
+            const t = document.getElementById('toggleDark');
+            t.setAttribute('aria-checked', ativo);
+            salvarConfig('darkMode', ativo);
+        }
+
+        document.getElementById('toggleDark').addEventListener('click', function() {
+            definirEscuro(this.getAttribute('aria-checked') !== 'true');
+        });
+
+        // ============================================
+        // ALTO CONTRASTE (barra + configurações sincronizados)
+        // ============================================
+        function definirContraste(ativo) {
+            document.body.classList.toggle('contraste', ativo);
+            document.getElementById('toggleContrast').setAttribute('aria-checked', ativo);
+            document.getElementById('btnContrasteBarra').setAttribute('aria-pressed', ativo);
+            salvarConfig('contrast', ativo);
+        }
+
+        document.getElementById('toggleContrast').addEventListener('click', function() {
+            definirContraste(this.getAttribute('aria-checked') !== 'true');
+        });
+        document.getElementById('btnContrasteBarra').addEventListener('click', function() {
+            definirContraste(this.getAttribute('aria-pressed') !== 'true');
+        });
+
+        // ============================================
+        // NARRADOR (leitura em voz alta ao passar o mouse)
+        // ============================================
+        let narradorAtivo = false;
+        let ultimoTextoLido = '';
+
+        function definirNarrador(ativo) {
+            narradorAtivo = ativo;
+            document.getElementById('toggleSpeech').setAttribute('aria-checked', ativo);
+            document.getElementById('btnNarradorBarra').setAttribute('aria-pressed', ativo);
+            salvarConfig('speech', ativo);
+            if (!ativo && 'speechSynthesis' in window) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        document.getElementById('toggleSpeech').addEventListener('click', function() {
+            definirNarrador(this.getAttribute('aria-checked') !== 'true');
+        });
+        document.getElementById('btnNarradorBarra').addEventListener('click', function() {
+            definirNarrador(this.getAttribute('aria-pressed') !== 'true');
+        });
+
+        document.addEventListener('mouseover', function(e) {
+            if (!narradorAtivo || !('speechSynthesis' in window)) return;
+            const el = e.target.closest('p, h1, h2, h3, h4, li, a, button, label, th, td, blockquote, cite');
+            if (!el) return;
+            const texto = (el.innerText || '').trim();
+            if (!texto || texto === ultimoTextoLido) return;
+            ultimoTextoLido = texto;
+            speechSynthesis.cancel();
+            const fala = new SpeechSynthesisUtterance(texto.slice(0, 220));
+            fala.lang = 'pt-BR';
+            fala.rate = 1;
+            speechSynthesis.speak(fala);
+        });
+
+        // ============================================
+        // NOTIFICAÇÕES
+        // ============================================
+        document.getElementById('toggleNotifications').addEventListener('click', function() {
+            const ativo = this.getAttribute('aria-checked') !== 'true';
+            this.setAttribute('aria-checked', ativo);
+            salvarConfig('notifications', ativo);
+        });
+
+        // ============================================
+        // SALVAR / CARREGAR CONFIGURAÇÕES (localStorage)
+        // ============================================
+        function salvarConfig(chave, valor) {
+            let config = {};
+            try { config = JSON.parse(localStorage.getItem('configAero') || '{}'); } catch (e) {}
+            config[chave] = valor;
+            localStorage.setItem('configAero', JSON.stringify(config));
+        }
+
+        function carregarConfig() {
+            let config = {};
+            try { config = JSON.parse(localStorage.getItem('configAero') || '{}'); } catch (e) {}
+
+            if (typeof config.zoom === 'number') {
+                zoom = Math.min(Math.max(config.zoom, ZOOM_MIN), ZOOM_MAX);
+            }
+            aplicarZoom();
+
+            if (config.darkMode) definirEscuro(true);
+            if (config.contrast) definirContraste(true);
+            if (config.speech) definirNarrador(true);
+            if (config.notifications === false) {
+                document.getElementById('toggleNotifications').setAttribute('aria-checked', 'false');
+            }
+        }
+
+        // ============================================
+        // SISTEMA DE LOGIN
+        // ============================================
+        let usuarioLogado = null;
+
+        function mostrarFeedback(id, tipo, mensagem, tempo) {
+            const el = document.getElementById(id);
+            el.className = 'feedback ' + tipo;
+            el.textContent = mensagem;
+            clearTimeout(el._timer);
+            el._timer = setTimeout(() => {
+                el.className = 'feedback';
+                el.textContent = '';
+            }, tempo || 4000);
+        }
+
+        function atualizarStatusLogin() {
+            const status = document.getElementById('statusTexto');
+            const btnLogin = document.getElementById('btnLogin');
+            const btnLogout = document.getElementById('btnLogout');
+            const emailInput = document.getElementById('emailLogin');
+            const senhaInput = document.getElementById('senhaLogin');
+
+            if (usuarioLogado) {
+                status.innerHTML = 'Logado como <span class="user-name"></span>';
+                status.querySelector('.user-name').textContent = usuarioLogado;
+                btnLogin.style.display = 'none';
+                btnLogout.style.display = 'block';
+                emailInput.disabled = true;
+                senhaInput.disabled = true;
+            } else {
+                status.textContent = 'Você não está logado';
+                btnLogin.style.display = 'block';
+                btnLogout.style.display = 'none';
+                emailInput.disabled = false;
+                senhaInput.disabled = false;
+            }
+        }
+
+        // Login — feedback exibido na PRÓPRIA página de login
+        document.getElementById('formLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailLogin').value.trim();
+            const senha = document.getElementById('senhaLogin').value;
+
+            if (email && email.includes('@') && senha.length >= 6) {
+                usuarioLogado = email.split('@')[0];
+                localStorage.setItem('usuarioAero', JSON.stringify({ email: email, nome: usuarioLogado }));
+                atualizarStatusLogin();
+                mostrarFeedback('feedbackLogin', 'success', 'Bem-vindo(a) de volta, ' + usuarioLogado + '! Login realizado.');
+            } else {
+                mostrarFeedback('feedbackLogin', 'error', 'Informe um e-mail válido e uma senha com pelo menos 6 caracteres.');
+            }
+        });
+
+        // Logout — feedback também na página de login
+        document.getElementById('btnLogout').addEventListener('click', function() {
+            if (confirm('Deseja realmente sair da sua conta?')) {
+                usuarioLogado = null;
+                localStorage.removeItem('usuarioAero');
+                atualizarStatusLogin();
+                mostrarFeedback('feedbackLogin', 'success', 'Você saiu da sua conta. Até a próxima!', 3000);
+            }
+        });
+
+        // ============================================
+        // FORMULÁRIO DE CADASTRO
+        // ============================================
+        document.getElementById('formCadastro').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('nomeCadastro').value.trim();
+            const email = document.getElementById('emailCadastro').value.trim();
+            const senha = document.getElementById('senhaCadastro').value;
+            const confirmar = document.getElementById('confirmarSenha').value;
+
+            if (!nome || !email || !senha || !confirmar) {
+                mostrarFeedback('feedbackCadastro', 'error', 'Preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                mostrarFeedback('feedbackCadastro', 'error', 'Informe um e-mail válido.');
+                return;
+            }
+
+            if (senha.length < 6) {
+                mostrarFeedback('feedbackCadastro', 'error', 'A senha precisa ter no mínimo 6 caracteres.');
+                return;
+            }
+
+            if (senha !== confirmar) {
+                mostrarFeedback('feedbackCadastro', 'error', 'As senhas não coincidem. Confira e tente de novo.');
+                return;
+            }
+
+            let usuarios = [];
+            try { usuarios = JSON.parse(localStorage.getItem('usuariosAero') || '[]'); } catch (err) {}
+
+            if (usuarios.find(u => u.email === email)) {
+                mostrarFeedback('feedbackCadastro', 'error', 'Este e-mail já está cadastrado. Tente fazer login.');
+                return;
+            }
+
+            usuarios.push({ nome: nome, email: email, senha: senha, data: new Date().toISOString() });
+            localStorage.setItem('usuariosAero', JSON.stringify(usuarios));
+
+            // Login automático após o cadastro
+            usuarioLogado = nome;
+            localStorage.setItem('usuarioAero', JSON.stringify({ email: email, nome: nome }));
+            atualizarStatusLogin();
+
+            mostrarFeedback('feedbackCadastro', 'success', 'Cadastro feito! Bem-vindo(a) à Aero Fitness, ' + nome + '.');
+            this.reset();
+        });
+
+        // ============================================
+        // FORMULÁRIO DE CONTATO
+        // ============================================
+        document.getElementById('formContato').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('nomeContato').value.trim();
+            const email = document.getElementById('emailContato').value.trim();
+            const mensagem = document.getElementById('mensagemContato').value.trim();
+
+            if (!nome || !email || !mensagem) {
+                mostrarFeedback('feedbackContato', 'error', 'Preencha nome, e-mail e mensagem.');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                mostrarFeedback('feedbackContato', 'error', 'Informe um e-mail válido para podermos responder.');
+                return;
+            }
+
+            mostrarFeedback('feedbackContato', 'success', 'Mensagem enviada! Respondemos em até um dia útil, ' + nome + '.');
+            this.reset();
+        });
+
+        // ============================================
+        // INICIALIZAÇÃO
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarConfig();
+
+            const usuarioSalvo = localStorage.getItem('usuarioAero');
+            if (usuarioSalvo) {
+                try {
+                    const data = JSON.parse(usuarioSalvo);
+                    if (data && data.email) {
+                        usuarioLogado = data.nome || data.email.split('@')[0];
+                    }
+                } catch (e) {
+                    usuarioLogado = null;
+                }
+            }
+            atualizarStatusLogin();
+        });
+
+        // Fechar feedback ao clicar nele
+        document.querySelectorAll('.feedback').forEach(el => {
+            el.addEventListener('click', function() {
+                this.className = 'feedback';
+                this.textContent = '';
+            });
+        });
+    </script>
+</body>
+</html>

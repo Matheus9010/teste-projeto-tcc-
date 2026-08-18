@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aero Fitness | Sua Jornada Começa Aqui</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #000088 0%, #1a1a3e 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+       
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* NAVBAR CENTRALIZADA */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            color: #f5f5f5;
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            order: 1;
+        }
+
+        .nav-link {
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: rgba(0,0,136,0.2);
+            transform: translateY(-6px);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            order: 3;
+        }
+
+        .user-icon, .config-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(0,0,136,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFD700;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgb(255, 208, 0);
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            order: 2;
+            
+        }
+
+        .user-icon:hover, .config-icon:hover {
+            background: rgba(0,0,136,0.5);
+            transform: scale(1.15);
+            box-shadow: 0 8px 25px rgba(0,0,136,0.4);
+            margin-top: 20px;
+        
+        }
+
+        /* HERO/CAROUSEL */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px; /* Espaço para navbar fixa */
+        }
+
+        .carousel {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .carousel-inner {
+            height: 100%;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .carousel-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .carousel-title span {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .carousel-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .carousel-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgb(253, 215, 0);
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255,215,0,0.6);
+        }
+
+        /* ÍCONES EMBAIXO DO CARROSSEL */
+        .carousel-icons {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2rem;
+            z-index: 10;
+            padding: 1rem;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .icon-item {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 217, 4, 0.9), rgba(255,165,0,0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgb(255, 145, 0);
+        }
+
+        .icon-item:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 20px 40px rgb(255, 187, 2);
+        }
+
+        /* WELCOME SECTION */
+        .welcome {
+            max-width: 1200px;
+            margin: 8rem auto 5rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .welcome-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            background: linear-gradient(45deg, rgb(99, 99, 99), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'italic';
+            text-align: right;
+        }
+
+        .welcome-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }   
+
+        #missao {
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 600;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #FFD700;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        #missao strong {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 20px;
+            font-style: italic;
+            font-weight: 600;
+            padding: 20px;
+      
+        }
+
+        .logo-section {
+            text-align: center;
+        }
+
+        .logo-section img {
+            max-width: 100%;
+            height: auto;
+            height: 400px;
+            object-fit: contain;
+
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #f5f5f5;
+            text-decoration: none;
+            order: 2;
+        }
+
+
+
+        /* RESPONSIVO */
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+                order: 3;
+            }
+
+            .logo-nav {
+                order: 2;
+                font-size: 20px;
+                margin-top: 60%;
+
+            }
+
+            .nav-actions {
+                order: 1;
+            }
+
+            .welcome {
+          
+                text-align: center;
+                margin: auto;
+                margin-left: 25px;
+            }
+
+            .carousel-icons {
+                gap: 1rem;
+                bottom: 1rem;
+                padding: 0.8rem;
+            }
+
+            .icon-item {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                margin-right: 11px;
+            }
+        
+    </style>
+</head>
+<body>
+    <!-- NAVBAR CENTRALIZADA -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link">INÍCIO</a></li>
+                <li><a href="#" class="nav-link">SOBRE</a></li>
+                <li><a href="#" class="nav-link">LUGARES</a></li>
+                <li><a href="#" class="nav-link">TIPOS DE TREINOS</a></li>
+                <li><a href="#" class="nav-link">APLICATIVOS DE TREINOS</a></li>
+                <li><a href="#" class="nav-link">CONTATO</a></li>
+            </ul>
+                <div class="user-icon" title="Login">
+                    <a href="login test 01.HTML"></a>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="config-icon" title="Configurações">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO COM ÍCONES EMBAIXO -->
+    <section id="home" class="hero">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Academia 1">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-content">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Academia 2">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-content">
+                        
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Academia 3">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-content">
+    
+                    </div>
+                </div>
+            </div>
+
+           
+    </section>
+
+    <!-- WELCOME SECTION -->
+    <section id="sobre" class="welcome">
+        <div class="welcome-content">
+            <h1>SEJA BEM-VINDO(A) AO AERO FITNESS</h1>
+            <p>Descubra experiências incríveis e conteúdo exclusivo que vão transformar sua jornada fitness.</p>
+            <p>Localizada no coração da cidade, a <strong>AERO FITNESS</strong> tem o propósito de oferecer um espaço completo para quem busca saúde, bem-estar e evolução pessoal.</p>
+            <p id="missao"><em>Nossa missão é: <strong>"Proporcionar qualidade de vida, saúde e bem-estar por meio do movimento, incentivando o investimento no próprio corpo e na própria vida."</strong></em></p>
+            <p>Nossas orientações e conteúdos são projetados para auxiliar você a progredir com segurança, fornecendo sugestões de exercícios, treinos, bem-estar e hábitos saudáveis.</p>
+        </div>
+        <div class="logo-section">
+            <img src="Protótipo_TCC__3.png" alt="">
+        </div>
+    </section>
+
+    <script>
+        // LOADING SCREEN
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2500);
+        });
+
+        // CAROUSEL FUNCTIONALITY
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            currentSlideIndex = index;
+        }
+
+        function changeSlide(direction) {
+            let newIndex = currentSlideIndex + direction;
+            if (newIndex >= slides.length) newIndex = 0;
+            if (newIndex < 0) newIndex = slides.length - 1;
+            showSlide(newIndex);
+        }
+
+        // AUTO SLIDE
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // NAVBAR SCROLL EFFECT
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255,215,0,0.98)';
+                navbar.style.boxShadow = '0 8px 30px rgba(0,0,0,0.3)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, rgba(255,215,0,0.95), rgba(255,165,0,0.95))';
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+            }
+        });
+    </script>
+</body>
+</html>

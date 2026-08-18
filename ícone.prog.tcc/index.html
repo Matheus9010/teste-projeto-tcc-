@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <title>Recuperar Senha</title>
+</head>
+<body>
+    <div id="form">
+        <form action="">
+            <h2 class="title">Recuperar Senha</h2>
+            <label for="email">Email</label>
+            <div class="input">
+                <i class="fa-solid fa-envelope"></i>
+                <input id="email" name="email" placeholder="Email" type="text" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/">
+            </div>
+            <label for="senha">Senha</label>
+            <div class="input">
+                <i class="fa-solid fa-lock"></i>
+                <input id="senha" name="senha" placeholder="Password" type="password" required>
+            </div>
+            <div id="btn">
+                <button type="submit">Registrar Nova Senha</button>
+            </div>
+        </form>
+    </div>
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordInput = document.querySelector('#password');
+            
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            const emailInput = document.getElementById('email');
+            const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+            
+            emailInput.addEventListener('input', function() {
+                if (this.value && !emailPattern.test(this.value)) {
+                    this.setCustomValidity('Digite um email válido (ex: usuario@gmail.com)');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+        });
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+        }
+
+        function getInitialsFromEmail(email) {
+            const namePart = email.split('@')[0].toUpperCase();
+            const parts = namePart.split('.');
+            let initials = parts[0][0];
+            
+            if (parts.length > 1) {
+                initials += parts[1][0];
+            } else {
+                initials += namePart[1] || '';
+            }
+            
+        }
+    </script>
+</body>
+</html>
